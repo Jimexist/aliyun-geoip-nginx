@@ -18,6 +18,10 @@ plugins {
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+
+    maven {
+        url "https://repo.clojars.org"
+    }
 }
 
 spotless {
@@ -32,6 +36,16 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:30.0-jre'
+
+    // https://mvnrepository.com/artifact/nginx-clojure/nginx-clojure
+    implementation group: 'nginx-clojure', name: 'nginx-clojure', version: '0.5.2'
+
+    // https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core
+    implementation group: 'com.aliyun', name: 'aliyun-java-sdk-core', version: '4.5.20'
+
+    // https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-geoip
+    implementation group: 'com.aliyun', name: 'aliyun-java-sdk-geoip', version: '1.0.4'
+
 }
 
 shadowJar {

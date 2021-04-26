@@ -3,12 +3,37 @@
  */
 package nginx.geoip.aliyun;
 
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.geoip.model.v20200101.DescribeIpv4LocationRequest;
+import com.aliyuncs.geoip.model.v20200101.DescribeIpv4LocationResponse;
+import com.aliyuncs.profile.DefaultProfile;
+import com.google.gson.Gson;
+
 public class App {
   public String getGreeting() {
     return "Hello World!";
   }
 
   public static void main(String[] args) {
+    tryResolve();
     System.out.println(new App().getGreeting());
+  }
+
+  private static void tryResolve() {
+    DefaultProfile profile =
+        DefaultProfile.getProfile("cn-hangzhou", "<accessKeyId>", "<accessSecret>");
+    IAcsClient client = new DefaultAcsClient(profile);
+    DescribeIpv4LocationRequest request = new DescribeIpv4LocationRequest();
+    request.setIp("221.206.131.10");
+    try {
+      DescribeIpv4LocationResponse response = client.getAcsResponse(request);
+      System.out.println(new Gson().toJson(response));
+    } catch (ClientException e) {
+      System.out.println("ErrCode:" + e.getErrCode());
+      System.out.println("ErrMsg:" + e.getErrMsg());
+      System.out.println("RequestId:" + e.getRequestId());
+    }
   }
 }

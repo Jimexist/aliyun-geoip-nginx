@@ -14,7 +14,12 @@ jobs:
         with:
           distribution: "adopt"
           java-version: ${{ matrix.java }}
+
+      - name: Gradle Run
+        run: ./gradlew run
+
       - name: Build shadow jar
         run: ./gradlew shadowJar
-      - name: Run application
+
+      - name: Run shadow jar application
         run: java -jar build/libs/aliyun-geoip-nginx-all.jar
