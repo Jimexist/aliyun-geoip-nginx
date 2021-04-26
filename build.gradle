@@ -12,11 +12,18 @@ plugins {
     id 'idea'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
     id 'java'
+    id 'com.diffplug.spotless' version '5.12.4'
 }
 
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+}
+
+spotless {
+    java {
+        googleJavaFormat()
+    }
 }
 
 dependencies {
