@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
+        distribution: "adopt"
         java: ["8", "11", "16"]
     name: Java ${{ matrix.Java }} shadowJar
     steps:
