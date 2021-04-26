@@ -30,6 +30,9 @@ spotless {
     }
 }
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 dependencies {
     // Use JUnit test framework.
     testImplementation 'junit:junit:4.13.1'
@@ -45,11 +48,13 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-geoip
     implementation group: 'com.aliyun', name: 'aliyun-java-sdk-geoip', version: '1.0.4'
-
 }
 
 shadowJar {
     mainClassName = 'nginx.geoip.aliyun.App'
+    minimize {
+        exclude(dependency('commons-logging:.*:.*'))
+    }
 }
 
 application {
