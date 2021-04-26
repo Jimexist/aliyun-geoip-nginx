@@ -1,3 +1,5 @@
+name: Build
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -12,5 +14,7 @@ jobs:
         with:
           distribution: "<distribution>"
           java-version: ${{ matrix.java }}
-      - run: ./gradlew shadowJar
-      - run: java -jar build/libs/aliyun-geoip-nginx-all.jar
+      - name: Build shadow jar
+        run: ./gradlew shadowJar
+      - name: Run application
+        run: java -jar build/libs/aliyun-geoip-nginx-all.jar
