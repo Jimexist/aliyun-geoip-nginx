@@ -11,7 +11,7 @@ This is based on [nginx-clojure](https://nginx-clojure.github.io/index.html) and
 ```bash
 # this builds the shadowJar
 ./gradlew shadowJar
-# this copies the shadowJar to docker folderr
+# this copies the shadowJar to docker folder
 cp build/libs/aliyun-geoip-nginx-all.jar docker
 cd docker
 # build the docker image
@@ -49,3 +49,7 @@ success!* Closing connection 0
 ```
 
 Note the `jiayu-test-response` is the line rewritten by the Java class.
+
+## TODO:
+
+Actually implement the IP lookup logic.
