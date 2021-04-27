@@ -19,3 +19,5 @@ build
 *.iml
 *.ipr
 *.iws
+
+docker/aliyun-geoip-nginx-all.jar
