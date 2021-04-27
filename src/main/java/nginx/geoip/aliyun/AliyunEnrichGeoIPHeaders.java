@@ -1,10 +1,8 @@
 package nginx.geoip.aliyun;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.Map;
-
 import com.google.common.net.HttpHeaders;
+import java.io.IOException;
+import java.util.Map;
 import nginx.clojure.NginxClojureRT;
 import nginx.clojure.java.Constants;
 import nginx.clojure.java.NginxJavaRingHandler;
