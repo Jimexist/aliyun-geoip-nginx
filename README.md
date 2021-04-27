@@ -25,31 +25,22 @@ docker run --rm -it --name aliyun-geoip-nginx -p "8081:8081" aliyun-geoip-nginx
 curl -v localhost:8081
 ```
 
-which gives:
+and then tail the log from docker
 
-```
-*   Trying ::1...
-* TCP_NODELAY set
-* Connected to localhost (::1) port 8081 (#0)
-> GET / HTTP/1.1
-> Host: localhost:8081
-> User-Agent: curl/7.64.1
-> Accept: */*
->
-< HTTP/1.1 200 OK
-< Date: Tue, 27 Apr 2021 03:12:16 GMT
-< Content-Type: application/octet-stream
-< Content-Length: 8
-< Connection: keep-alive
-< Server: nginx-clojure/0.5.2
-< jiayu-test-response: 2021-04-27T03:12:16.924
-<
-* Connection #0 to host localhost left intact
-success!* Closing connection 0
+```bash
+docker exec aliyun-geoip-nginx cat logs/error.log
 ```
 
-Note the `jiayu-test-response` is the line rewritten by the Java class.
+```
+2021-04-27 03:31:24[info][7][nginx-clojure-worker-0]AliyunEnrichGeoIPHeaders hit, host is not set
+2021-04-27 03:31:24[info][7][nginx-clojure-worker-0]AliyunEnrichGeoIPHeaders all request request {id : 19425232,  uri: /}
+2021/04/27 03:31:24 [info] 7#0: *1 client 172.17.0.1 closed keepalive connection
+2021-04-27 03:31:40[info][11][nginx-clojure-worker-0]AliyunEnrichGeoIPHeaders hit, host is not set
+2021-04-27 03:31:40[info][11][nginx-clojure-worker-0]AliyunEnrichGeoIPHeaders all request request {id : 19332656,  uri: /}
+2021/04/27 03:32:40 [info] 11#0: *2 client 172.17.0.1 closed keepalive connection
+```
 
 ## TODO:
 
-Actually implement the IP lookup logic.
+- [ ] Actually implement the IP lookup logic.
+- [ ] enable the coroutine support

@@ -4,17 +4,18 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import com.google.common.net.HttpHeaders;
 import nginx.clojure.NginxClojureRT;
 import nginx.clojure.java.Constants;
-import nginx.clojure.java.NginxJavaHeaderFilter;
+import nginx.clojure.java.NginxJavaRingHandler;
 
-public class AliyunEnrichGeoIPHeaders implements NginxJavaHeaderFilter {
+public class AliyunEnrichGeoIPHeaders implements NginxJavaRingHandler {
+
   @Override
-  public Object[] doFilter(
-      int status, Map<String, Object> request, Map<String, Object> responseHeaders)
-      throws IOException {
-    NginxClojureRT.log.info("AliyunEnrichGeoIPHeaders hit");
-    responseHeaders.put("jiayu-test-response", LocalDateTime.now().toString());
+  public Object[] invoke(Map<String, Object> request) throws IOException {
+    String host = (String) request.getOrDefault(HttpHeaders.HOST, "not set");
+    NginxClojureRT.log.info(String.format("AliyunEnrichGeoIPHeaders hit, host is %s", host));
+    NginxClojureRT.log.info(String.format("AliyunEnrichGeoIPHeaders all request %s", request));
     return Constants.PHASE_DONE;
   }
 }
